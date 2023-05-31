@@ -16,7 +16,7 @@ class _FeedState extends State<Feed> {
 
   Future<List<ProductModel>> getpostapi() async {
     final response =
-        await http.get(Uri.parse("https://api.escuelajs.co/api/v1/products"));
+        await http.get(Uri.parse("https://fakestoreapi.com/products"));
     var data = jsonDecode(response.body.toString());
     if (response.statusCode == 200) {
       for (Map i in data) {
@@ -40,7 +40,7 @@ class _FeedState extends State<Feed> {
           return GridView.builder(
             physics: NeverScrollableScrollPhysics(),
             gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             itemCount: productlist.length,
@@ -66,14 +66,17 @@ class _FeedState extends State<Feed> {
                     ),
                     child: Column(
                       children: [
+                        Image.network(
+                          Snapshot.data![index].images.toString(),
+                        ),
                         // productlist[index].images == null
                         //     ? const Text("La image xaena")
                         //     :
 
-                        Image.network(
-                          productlist[index].images.toString(),
-                          fit: BoxFit.cover,
-                        ),
+                        // Image.network(
+                        //   productlist[index].images.toString(),
+                        //   fit: BoxFit.cover,
+                        // ),
                         Text(
                           productlist[index].title.toString(),
                           style: const TextStyle(
@@ -81,9 +84,9 @@ class _FeedState extends State<Feed> {
                               color: Colors.white,
                               fontWeight: FontWeight.bold),
                         ),
-                        Text(
-                          productlist[index].price.toString(),
-                        ),
+                        // Text(
+                        //   productlist[index]..toString(),
+                        // ),
                       ],
                     ),
                   ),
